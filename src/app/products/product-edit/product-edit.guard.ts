@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ProductEditComponent } from './product-edit.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductEditGuard implements CanDeactivate<ProductEditComponent>  {
+export class ProductEditGuard implements CanActivate {
 
-  canDeactivate(component: ProductEditComponent,
-                currentRoute: ActivatedRouteSnapshot,
-                currentState: RouterStateSnapshot,
-                nextState?: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+  constructor(private router: Router) { }
 
-    if (component.isDirty) {
-      const productName = component.product.productName || 'New Product';
-      return confirm(`Navigate away and lose all changes to ${productName}?`);
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    let id = +next.url[1].path;
+    if (isNaN(id) || id < 1) {
+      alert('Invalid product Id');
+      this.router.navigate(['/products']);
+      return false;
     }
     return true;
   }
-
 }

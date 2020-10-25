@@ -31,15 +31,14 @@ export class ProductListComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
-    this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
-
+  
     this.productService.getProducts().subscribe({
       next: products => {
+        console.log(products);
         this.products = products;
         this.filteredProducts = this.performFilter(this.listFilter);
       },
-      error: err => this.errorMessage = err
+      // error: err => this.errorMessage = err
     });
   }
 

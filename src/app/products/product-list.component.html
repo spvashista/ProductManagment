@@ -47,8 +47,7 @@
                    [style.margin.px]="imageMargin">
             </td>
             <td>
-              <a [routerLink]="[product.id]"
-                 [queryParams]="{filterBy: listFilter, showImage: showImage}">
+              <a [routerLink]="[product.productId]">
                 {{ product.productName }}
               </a>
             </td>
@@ -61,7 +60,7 @@
             </td>
             <td>
               <button class="btn btn-outline-primary btn-sm"
-                      [routerLink]="[product.id, 'edit']">
+                      [routerLink]="[product.productId, 'edit']">
                 Edit
               </button>
             </td>

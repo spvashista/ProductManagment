@@ -1,10 +1,8 @@
 /* Defines the product entity */
 export interface Product {
-  id: number;
+  productId: number;
   productName: string;
   productCode: string;
-  category: string;
-  tags?: string[];
   releaseDate: string;
   price: number;
   description: string;
@@ -12,7 +10,3 @@ export interface Product {
   imageUrl: string;
 }
 
-export interface ProductResolved {
-  product: Product;
-  error?: any;
-}
