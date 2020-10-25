@@ -1,7 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import { Product } from './product';
-
+//This comment
 export class ProductData implements InMemoryDbService {
 
   createDb(): { products: Product[]} {
