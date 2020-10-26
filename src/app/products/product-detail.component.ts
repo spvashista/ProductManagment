@@ -15,9 +15,9 @@ export class ProductDetailComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    let productId = +this.route.snapshot.paramMap.get('productId');
-    alert(this.pageTitle);
-    this.pageTitle += `: ${productId}`;
+    let id = +this.route.snapshot.paramMap.get('id');   
+    this.pageTitle += `: ${id}`;
+    
     
    /* this.product = {
       'productId': id,
@@ -29,10 +29,12 @@ export class ProductDetailComponent implements OnInit {
       'starRating': 3.2,
       'imageUrl': 'assets/images/leaf_rake.png'
     };*/
-    this.getProduct(productId);
+ 
+    this.getProduct(id);
   }
 
   getProduct(productId: number): void {
+
     this.productService.getProduct(productId).subscribe({
       next: product => this.onProductRetrieved(product),
       // error: err => this.errorMessage = err

@@ -16,9 +16,9 @@ export class ProductEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    let productId = +this.route.snapshot.paramMap.get('productId');
-    this.pageTitle += `: ${productId}`;
-    this.getProduct(productId);
+    let id = +this.route.snapshot.paramMap.get('id');
+    this.pageTitle += `: ${id}`;
+    this.getProduct(id);
     
   }
 
@@ -35,7 +35,7 @@ export class ProductEditComponent implements OnInit {
     if (!this.product) {
       this.pageTitle = 'No product found';
     } else {
-      if (this.product.productId === 0) {
+      if (this.product.id === 0) {
         this.pageTitle = 'Add Product';
       } else {
         this.pageTitle = `Edit Product: ${this.product.productName}`;

@@ -17,11 +17,11 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
       {
-        path: 'products/:productId',       
+        path: 'products/:id',       
         component: ProductDetailComponent
       },
       {
-        path: 'products/:productId/edit',       
+        path: 'products/:id/edit',       
         component: ProductEditComponent
       }, 
          
