@@ -5,7 +5,7 @@
     {{pageTitle}}
   </div>
   <div class='table-responsive' >
-    <table class='table' *ngIf='product'>
+    <table class='table' >
       <thead>
         <tr>
           <th>Product</th>
@@ -17,11 +17,51 @@
       <tbody>
         <tr>          
           <td>    
-            <input type='text'
-             [(ngModel)]='product.productName' />   
+            <input class="form-control"
+            id="productNameId"
+            type="text"
+            placeholder="Name (required)"
+            required
+            minlength="3"
+            [(ngModel)]=product.productName
+            name="productName"
+            #productNameVar="ngModel"
+            [ngClass]="{'is-invalid': (productNameVar.touched || 
+            productNameVar.dirty ||
+            product.id !== 0) && 
+            !productNameVar.valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="productNameVar.errors?.required">
+                Product name is required.
+              </span>
+              <span *ngIf="productNameVar.errors?.minlength">
+                Product name must be at least three characters.
+              </span>
+            </span>
           </td>
-          <td>{{ product.productCode | lowercase }}</td>
-          <td>{{ product.releaseDate }}</td>   
+          <td>  <input class="form-control"
+            id="productCodeId"
+            type="text"
+            placeholder="Code (required)"
+            required
+            [(ngModel)]=product.productCode
+            name="productCode"
+            #productCodeVar="ngModel"
+            [ngClass]="{'is-invalid': (productCodeVar.touched || 
+                                       productCodeVar.dirty ||
+                                       product.id !== 0) &&
+                                       !productCodeVar.valid }" />
+     <span class="invalid-feedback">
+       <span *ngIf="productCodeVar.errors?.required">
+         Product code is required.
+       </span>
+     </span></td>
+          <td>{{ product.releaseDate }}</td>      <textarea class="form-control"
+          id="descriptionId"
+          placeholder="Description"
+          rows=3
+          [(ngModel)]=product.description
+          name="description"></textarea>
           <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
         </tr>
       </tbody>
