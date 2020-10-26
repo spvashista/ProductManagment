@@ -93,12 +93,12 @@ export class ProductEditComponent implements OnInit {
     if (this.isValid()) {
       if (this.product.id === 0) {
         this.productService.createProduct(this.product).subscribe({
-          next: () => this.onSaveComplete(`The new ${this.product.productName} was saved`),
+          next: () => this.onSaveComplete(`The new ${this.product.productName}  saved`),
           error: err => this.errorMessage = err
         });
       } else {
         this.productService.updateProduct(this.product).subscribe({
-          next: () => this.onSaveComplete(`The updated ${this.product.productName} was saved`),
+          next: () => this.onSaveComplete(`The updated ${this.product.productName}  saved`),
           error: err => this.errorMessage = err
         });
       }
@@ -109,10 +109,17 @@ export class ProductEditComponent implements OnInit {
 
   onSaveComplete(message?: string): void {
     if (message) {
+      alert(message);
       this.messageService.addMessage(message);
     }   
+    this.reset();
     // Navigate back to the product list
     this.router.navigate(['/products']);
+  }
+  reset(): void {
+    this.dataIsValid = null;
+    this.currentProduct = null;
+    this.originalProduct = null;
   }
 
   
