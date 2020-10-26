@@ -31,7 +31,9 @@ export class ProductListComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  
+    this.GetAll();  
+  }
+  GetAll=()=>{
     this.productService.getProducts().subscribe({
       next: products => {
         console.log(products);
@@ -40,6 +42,7 @@ export class ProductListComponent implements OnInit {
       },
       // error: err => this.errorMessage = err
     });
+
   }
 
   performFilter(filterBy: string): Product[] {
@@ -51,5 +54,20 @@ export class ProductListComponent implements OnInit {
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
+
+  OnProductRemove(productId) : void {
+   
+    this.productService.deleteProduct(productId).subscribe({
+      next: product => {
+        console.log(product);
+        this.GetAll();  
+      
+      },
+      // error: err => this.errorMessage = err
+    });
+
+  //  this.filteredProducts=this.products = this.productService.products.filter(x=>x.productId!=productId);
+   
+ }
 
 }

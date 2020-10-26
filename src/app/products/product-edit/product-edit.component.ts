@@ -18,6 +18,7 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     let id = +this.route.snapshot.paramMap.get('id');
     this.pageTitle += `: ${id}`;
+    alert('I m in edit');
     this.getProduct(id);
     
   }
