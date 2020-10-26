@@ -11,13 +11,14 @@
           <th>Product</th>
           <th>Code</th>
           <th>Available</th>
+          <th>Description</th>
           <th>Price</th>          
         </tr>
       </thead>
       <tbody>
         <tr>          
           <td>    
-            <input class="form-control"
+           <input class="form-control"
             id="productNameId"
             type="text"
             placeholder="Name (required)"
@@ -39,7 +40,8 @@
               </span>
             </span>
           </td>
-          <td>  <input class="form-control"
+          <td> 
+            <input class="form-control"
             id="productCodeId"
             type="text"
             placeholder="Code (required)"
@@ -51,19 +53,28 @@
                                        productCodeVar.dirty ||
                                        product.id !== 0) &&
                                        !productCodeVar.valid }" />
-     <span class="invalid-feedback">
+       <span class="invalid-feedback">
        <span *ngIf="productCodeVar.errors?.required">
          Product code is required.
        </span>
-     </span></td>
-          <td>{{ product.releaseDate }}</td>      <textarea class="form-control"
-          id="descriptionId"
-          placeholder="Description"
-          rows=3
-          [(ngModel)]=product.description
-          name="description"></textarea>
-          <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
-        </tr>
+     </span>
+     </td>
+      <td>
+        {{ product.releaseDate }}
+
+      </td>     
+      <td>
+       <textarea class="form-control"
+        id="descriptionId"
+        placeholder="Description"
+        rows=3
+        [(ngModel)]=product.description
+        name="description"></textarea>
+      </td>       
+      <td>
+        {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+      </td>
+      </tr>
       </tbody>
     </table>
   </div>
