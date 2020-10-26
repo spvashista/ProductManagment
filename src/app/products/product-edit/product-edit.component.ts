@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { MessageService } from '../../messages/message.service';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -11,9 +11,10 @@ import { ProductService } from '../product.service';
 export class ProductEditComponent implements OnInit {
   pageTitle: string = 'Product Edit';
   product: Product;
-
+  errorMessage: string;
+  private dataIsValid: { [key: string]: boolean } = {};
   constructor(private route: ActivatedRoute,private productService:ProductService,
-              private router: Router) { }
+              private router: Router,private messageService: MessageService) { }
 
   ngOnInit(): void {
     let id = +this.route.snapshot.paramMap.get('id'); 
@@ -41,27 +42,33 @@ export class ProductEditComponent implements OnInit {
       }
     }
   }
-
-onProductEdit(): void {
-      this.router.navigate(['/products']);
+ 
+  onProductSave(): void {
+    if (true===true) {
+      if (this.product.id === 0) {
+        this.productService.createProduct(this.product).subscribe({
+          next: () => this.onSaveComplete(`The new ${this.product.productName} was saved`),
+          error: err => this.errorMessage = err
+        });
+      } else {
+        this.productService.updateProduct(this.product).subscribe({
+          next: () => this.onSaveComplete(`The updated ${this.product.productName} was saved`),
+          error: err => this.errorMessage = err
+        });
+      }
+    } else {
+      this.errorMessage = 'Please correct the validation errors.';
+    }
   }
 
-  //  saveProduct(): void {
-   
-  //       this.productService.updateProduct(this.product).subscribe({
-  //         next: () => this.onSaveComplete(`The updated ${this.product.productName} was saved`),
-  //         error: err => this.errorMessage = err
-  //       });
-    
-  // }
+  onSaveComplete(message?: string): void {
+    if (message) {
+      this.messageService.addMessage(message);
+    }   
+    // Navigate back to the product list
+    this.router.navigate(['/products']);
+  }
 
-  // onSaveComplete(message?: string): void {
-  //   if (message) {
-  //     this.messageService.addMessage(message);
-  //   }  
-  //   // Navigate back to the product list
-  //   this.router.navigate(['/products']);
-  // }
-
+  
   
 }
