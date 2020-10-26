@@ -16,11 +16,8 @@ export class ProductEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.pageTitle += `: ${id}`;
-    alert('I m in edit');
-    this.getProduct(id);
-    
+    let id = +this.route.snapshot.paramMap.get('id'); 
+    this.getProduct(id);    
   }
 
   getProduct(productId: number): void {
@@ -31,6 +28,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onProductRetrieved(product: Product): void {
+  
     this.product = product;
 
     if (!this.product) {

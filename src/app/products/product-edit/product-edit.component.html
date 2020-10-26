@@ -1,52 +1,36 @@
-<div class='card'
+ <div class='card'
      *ngIf='product'>
   <div class='card-header'>
-    {{pageTitle + ': ' + product.productName}}
+    {{pageTitle}}
   </div>
-  <div class='table-responsive'>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Code</th>
-            <th>Available</th>
-            <th>Price</th>          
-          </tr>
-        </thead>
-        <tbody>
-          <tr>          
-            <td>    
-              <input type='text'
-               [(ngModel)]='product.productName' />   
-            </td>
-            <td>{{ product.productCode | lowercase | convertToSpaces:'-' }}</td>
-            <td>{{ product.releaseDate }}</td>
-            <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
-           
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <div class='card-footer'>   
-    <!-- <button class="btn btn-primary mr-3"
-                style="width:80px"
-                type="button"              
-                (click)="saveProduct()">
-          Save
-    </button> -->
- <button class='btn btn-outline-secondary'
-            (click)='onProductEdit()'
-            style='width:80px'>
-      <i class='fa fa-chevron-left'></i> Save
-    </button>   
-
-     <button class="btn btn-outline-secondary mr-3"
-                style="width:80px"
-                type="button"
-                title="Cancel your edits"
-                [routerLink]="['/products']">
-          Cancel
-        </button>
-   
+  <div class='table-responsive' >
+    <table class='table' *ngIf='product'>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Code</th>
+          <th>Available</th>
+          <th>Price</th>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>          
+          <td>    
+            <input type='text'
+             [(ngModel)]='product.productName' />   
+          </td>
+          
+              
+        </tr>
+      </tbody>
+    </table>
   </div>
+<div class='card-footer'>   
+<button class='btn btn-outline-secondary'
+          (click)='onProductEdit()'
+          style='width:80px'>
+    <i class='fa fa-chevron-left'></i> Save
+  </button>   
+ 
+</div>
 </div>
