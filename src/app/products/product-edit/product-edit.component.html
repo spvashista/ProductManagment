@@ -1,4 +1,5 @@
- <div class='card'
+
+<div class='card'
      *ngIf='product'>
   <div class='card-header'>
     {{pageTitle}}
@@ -19,8 +20,9 @@
             <input type='text'
              [(ngModel)]='product.productName' />   
           </td>
-          
-              
+          <td>{{ product.productCode | lowercase }}</td>
+          <td>{{ product.releaseDate }}</td>   
+          <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
         </tr>
       </tbody>
     </table>
